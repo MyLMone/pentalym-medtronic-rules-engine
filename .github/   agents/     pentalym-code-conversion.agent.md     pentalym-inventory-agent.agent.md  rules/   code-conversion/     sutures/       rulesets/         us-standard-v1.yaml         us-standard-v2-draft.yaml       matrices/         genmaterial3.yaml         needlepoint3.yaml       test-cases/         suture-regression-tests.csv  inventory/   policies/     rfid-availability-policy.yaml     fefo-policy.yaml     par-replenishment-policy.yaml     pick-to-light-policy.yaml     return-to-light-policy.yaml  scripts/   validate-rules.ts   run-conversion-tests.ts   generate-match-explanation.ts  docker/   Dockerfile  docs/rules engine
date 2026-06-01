@@ -1,0 +1,37 @@
+.github/
+  agents/
+    pentalym-code-conversion.agent.md
+    pentalym-inventory-agent.agent.md
+
+rules/
+  code-conversion/
+    sutures/
+      rulesets/
+        us-standard-v1.yaml
+        us-standard-v2-draft.yaml
+      matrices/
+        genmaterial3.yaml
+        needlepoint3.yaml
+      test-cases/
+        suture-regression-tests.csv
+
+inventory/
+  policies/
+    rfid-availability-policy.yaml
+    fefo-policy.yaml
+    par-replenishment-policy.yaml
+    pick-to-light-policy.yaml
+    return-to-light-policy.yaml
+
+scripts/
+  validate-rules.ts
+  run-conversion-tests.ts
+  generate-match-explanation.ts
+
+docker/
+  Dockerfile
+
+docs/
+  workflow.md
+  ruleset-schema.md
+  agent-usage.md
