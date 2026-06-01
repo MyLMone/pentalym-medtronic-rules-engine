@@ -1,0 +1,57 @@
+{
+  "id": "sutures-standard-v1",
+  "name": "Sutures Standard Conversion Ruleset",
+  "version": "1.0.0",
+  "status": "draft",
+  "productFamily": "Sutures",
+  "mandatoryRules": [
+    {
+      "field": "Genmaterial",
+      "ruleName": "Genmaterial Associations",
+      "matchingType": "Related",
+      "associationMatrixId": "Genmaterial3"
+    },
+    {
+      "field": "USP Size",
+      "ruleName": "USP Size Exact",
+      "matchingType": "Exact"
+    },
+    {
+      "field": "Needle 1 Point",
+      "ruleName": "Needle 1 Point Related",
+      "matchingType": "Related",
+      "associationMatrixId": "NeedlePoint3"
+    },
+    {
+      "field": "Needle 1 Curve",
+      "ruleName": "Needle 1 Curve Exact",
+      "matchingType": "Exact"
+    },
+    {
+      "field": "Suture Length",
+      "ruleName": "Suture Length Nearest",
+      "matchingType": "Nearest",
+      "marginPercent": 30
+    }
+  ],
+  "optionalRules": [
+    {
+      "field": "Strand dyed",
+      "ruleName": "Strand dyed Exact",
+      "matchingType": "Exact",
+      "weightPercent": 20
+    },
+    {
+      "field": "Black needle",
+      "ruleName": "Black needle Exact",
+      "matchingType": "Exact",
+      "weightPercent": 10
+    },
+    {
+      "field": "Long pack",
+      "ruleName": "Long pack Exact",
+      "matchingType": "Exact",
+      "weightPercent": 10
+    }
+  ]
+}

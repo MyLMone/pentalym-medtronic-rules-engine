@@ -1,0 +1,4 @@
+competitorCode,expectedMedtronicCode,expectedMatchType,notes
+1630H,SG-5630,Close Match,Needle length and USP align
+1793G,SS-5640-9G,Exact Match,Known approved mapping
+D10004,SG-5630,D-Code Match,D-code lookup

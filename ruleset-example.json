@@ -1,0 +1,139 @@
+{
+  "id": "patient-eligibility-ruleset",
+  "name": "Patient Eligibility Ruleset",
+  "version": "1.0.0",
+  "description": "Example CODE ruleset translated into JSON-based rules-as-code format.",
+  "metadata": {
+    "author": "pentalym",
+    "createdAt": "2026-06-01",
+    "source": "CODE sample conversion"
+  },
+  "inputSchema": {
+    "patient": {
+      "type": "object",
+      "properties": {
+        "age": {
+          "type": "integer"
+        },
+        "hasDiabetes": {
+          "type": "boolean"
+        },
+        "hasHypertension": {
+          "type": "boolean"
+        },
+        "labResults": {
+          "type": "object",
+          "properties": {
+            "hba1c": {
+              "type": "number"
+            },
+            "systolicBP": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "device": {
+      "type": "object",
+      "properties": {
+        "model": {
+          "type": "string"
+        },
+        "approvedForUse": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "rules": [
+    {
+      "id": "rule-eligibility-age",
+      "name": "Minimum age eligibility",
+      "description": "Patient must be 18 or older.",
+      "priority": 100,
+      "condition": {
+        "all": [
+          {
+            "fact": "patient.age",
+            "operator": ">=",
+            "value": 18
+          }
+        ]
+      },
+      "actions": [
+        {
+          "type": "set",
+          "path": "eligibility.agePassed",
+          "value": true
+        },
+        {
+          "type": "set",
+          "path": "eligibility.reason",
+          "value": "Patient is at least 18 years old."
+        }
+      ]
+    },
+    {
+      "id": "rule-eligibility-diabetes",
+      "name": "Diabetes enrollment flag",
+      "description": "Mark patients with diabetes as eligible for the diabetes management program.",
+      "priority": 90,
+      "condition": {
+        "any": [
+          {
+            "fact": "patient.hasDiabetes",
+            "operator": "==",
+            "value": true
+          },
+          {
+            "all": [
+              {
+                "fact": "patient.labResults.hba1c",
+                "operator": ">=",
+                "value": 6.5
+              }
+            ]
+          }
+        ]
+      },
+      "actions": [
+        {
+          "type": "set",
+          "path": "eligibility.programs",
+          "value": [
+            "diabetes-management"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rule-device-approved",
+      "name": "Device approval requirement",
+      "description": "Device must be approved before use.",
+      "priority": 80,
+      "condition": {
+        "fact": "device.approvedForUse",
+        "operator": "==",
+        "value": true
+      },
+      "actions": [
+        {
+          "type": "set",
+          "path": "deviceStatus",
+          "value": "approved"
+        }
+      ]
+    }
+  ],
+  "outcomes": [
+    {
+      "id": "eligible",
+      "description": "Patient is eligible for program enrollment."
+    },
+    {
+      "id": "notEligible",
+      "description": "Patient is not eligible."
+    }
+  ]
+}

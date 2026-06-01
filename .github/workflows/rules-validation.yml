@@ -1,0 +1,24 @@
+name: Rules Validation
+
+on:
+  pull_request:
+    paths:
+      - "rules/**"
+      - "inventory/**"
+      - "scripts/**"
+
+jobs:
+  validate-rules:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build validation container
+        run: docker build -t pentalym-rules-engine .
+
+      - name: Validate rulesets
+        run: docker run --rm pentalym-rules-engine
+
+      - name: Run conversion regression tests
+        run: docker run --rm pentalym-rules-engine npm run test:conversion

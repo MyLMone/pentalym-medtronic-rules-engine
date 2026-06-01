@@ -1,0 +1,17 @@
+{
+  "name": "pentalym-medtronic-rules-engine",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "validate:rules": "tsx scripts/validate-rules.ts",
+    "test:conversion": "tsx scripts/run-conversion-tests.ts",
+    "explain:match": "tsx scripts/generate-match-explanation.ts"
+  },
+  "dependencies": {
+    "yaml": "^2.9.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  }
+}
